@@ -1,0 +1,66 @@
+# ─── Environment & Secrets ──────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# ─── Node.js Dependencies ─────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ─── Hardhat / EVM Artifacts ────────────────────────────────────────────────
+cache/
+cache_hardhat/
+typechain/
+typechain-types/
+artifacts/build-info/
+artifacts/**/*.dbg.json
+
+# ─── Next.js / Frontend Build ───────────────────────────────────────────────
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# ─── IDE & Editor Files ─────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-workspace
+*.sublime-project
+
+# ─── OS Generated Files ──────────────────────────────────────────────────────
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# ─── Logs & Debug ───────────────────────────────────────────────────────────
+logs/
+*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ─── Testing ────────────────────────────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─── Temporary Files ────────────────────────────────────────────────────────
+tmp/
+temp/
+*.tmp
+
+# ─── Sensitive Config (keep secrets out of git) ─────────────────────────────
+openclaw-skill/config.json
+decrypted-*.json
+frontend/public/downloads/
