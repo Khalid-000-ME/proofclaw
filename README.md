@@ -1,194 +1,150 @@
-# ProofClaw
+# ProofClaw: The Mining Network for AI Agents
 
-**Quality-staked AI task market on Hedera**
-
-ProofClaw is the missing quality layer for AI agent commerce on Hedera. **x402** made it possible for agents to pay each other instantly and with finality. **ProofClaw** makes those payments worth something — by enforcing mathematical consensus and putting provider stakes at risk on every result they return.
-
-### Current State of the Protocol
-
-ProofClaw is currently live and functional on the **Hedera Testnet**. The protocol architecture comprises 6 fully-deployed Solidity smart contracts handling the entire lifecycle of an AI task securely on-chain.
-
-- **Smart Contracts (Deployed & Verified)**: `TaskRegistry`, `TaskEscrow`, `TaskConsensus`, `ProviderRegistry`, `ProofToken`, and `TaskReceiptNFT`.
-- **Frontend App**: Built with Next.js 14 and Tailwind CSS, allowing requesters to view network stats, inspect node operators, and track disputes.
-- **Provider Node execution**: Node operators (running Claude, OpenAI, or local instances like Ollama) can successfully listen for tasks, stake HBAR, execute prompts, and submit secured hashes for arbitration.
-- **On-chain settlements**: If a provider answers correctly (in the >=67% majority), their stakes are returned, they are rewarded in HBAR and PROOF tokens, and reputation increases. If they dissent or hallucinate, their stake is slashed and distributed to the treasury.
+**Turn your idle compute into HBAR by providing verifiable proof for the agent economy.**
 
 ---
 
-## The User Flow
+## 🏔️ The Story
 
-ProofClaw decouples the payment logic from the quality-assurance logic. At a high level, the flow looks like this:
+Right now, millions of AI agents are running the world's tasks — writing code, analyzing data, scoring risk, and classifying content. But there is a massive hidden flaw: **Every single one of them is trusting a single API endpoint blindly.** They pay, and they hope. There is no way to know if the result was a cheap hallucination, stale data, or a flat-out fabrication.
 
-### 1. Provider Onboarding
-Network node operators (ranging from Raspberry Pi home servers running Ollama to enterprise setups) register their wallets on the `ProviderRegistry` contract. They must deposit a minimum **HBAR stake** to activate their node, establishing their baseline reputation score.
+Meanwhile, your laptop or that Raspberry Pi sitting on your desk is idle 60% of the day. It has untapped compute that nobody is using.
 
-### 2. Task Creation (Requester)
-An AI Agent (or human user) needs a task completed reliably—for example, verifying a document or extracting structured JSON. They submit the task parameters to the `TaskRegistry` and pre-fund the task reward into the `TaskEscrow` contract. Off-chain instructions (like the raw text to be processed) are typically published to an immutable HCS (Hedera Consensus Service) topic.
+**ProofClaw connects these two facts.** 
 
-### 3. Task Claiming (Providers)
-Active providers observe the network. Upon seeing the task, they explicitly claim it by calling `stakeForTask` in the `TaskEscrow` contract—temporarily locking up their own HBAR against the task's required stake. This strictly limits participation to providers with skin in the game.
+By downloading a single installer and hitting "Start," your machine joins a decentralized network of verified providers. When an AI agent needs a task done, your machine runs it in the background, commits a result hash to Hedera, and compares it against the network. When you agree with the honest majority — and you will, because you're running the same model — you earn HBAR automatically.
 
-### 4. Execution & Commit-Reveal Submission
-Providers process the task locally. To prevent frontrunning or result-copying from competitors on the public ledger, ProofClaw uses a **commit-reveal** scheme:
-- **Phase 1 (Commit)**: Providers submit only an unreadable hash of their final answer to the `TaskConsensus` contract.
-- **Phase 2 (Reveal)**: Once enough hashes are collected (or the commit deadline passes), providers publish their raw plaintext answers to an HCS topic. The protocol verifies that the hash of the revealed plaintext exactly matches the previously committed hash, proving independent computation.
+The agent doesn't get a promise; they get a **Cryptographic Receipt.** A consensus-verified answer. A proof.
 
-### 5. Automated Arbitrage & Consensus
-Once a required threshold of providers submit their hashes, the `TaskConsensus` contract acts as the strict mathematical arbiter:
-- **Consensus (>= 67% match)**: Providers in the majority win. They get their original stakes refunded, earn a split of the Requester's upfront reward, mint 1 `PROOF` reputation token, and their global trust score increases.
-- **Slashed (Minority/Hallucinations)**: Dissenting or wrong providers suffer a severe penalty (e.g., 50% slash of their locked HBAR). The slashed funds are redirected to the protocol treasury, and their reputation drops. 
-- **No Consensus**: The task moves to a `DISPUTED` state, opening a window for manual or decentralized challenges.
-
-### 6. Cryptographic Finality
-The confirmed answer is revealed off-chain. The Requester is granted a `TaskReceiptNFT` representing permanent on-chain proof that their AI response was independently verified and crowdsourced by a decentralized network, not just a single API endpoint.
+**You are not building infrastructure. You are turning idle silicon into income.**
 
 ---
 
-## Protocol Sequence Diagram
+### 🏗️ Overall Architecture
+
+```text
+                                     _________________________________________
+                                    |                                         |
+         [ AI AGENTS ]              |        HEDERA HASHGRAPH NETWORK         |
+      (The Requesters)              |_________________________________________|
+               |                                ^                  ^
+               | 1. Fund Task                   |                  |
+               v                                | 2. Post Task     | 5. Submit Hashes
+    +-----------------------+                   |    Payload       |    & Reveal Results
+    |   ProofClaw Market    |-------------------+                  |
+    |  (Next.js Frontend)   |                   |                  |
+    +-----------------------+                   |        __________|__________
+               |                                |       |                     |
+               |                                |       |   HCS TOPIC BUS     |
+               |                                |       | (Immutable Ordering)|
+               |                                |       |_____________________|
+               |                                |                  ^
+               |                                |                  | 4. Listen &
+    +-----------------------+                   |                  |    Claim Task
+    |   ProofClaw Desktop   |                   |                  |
+    |     "THE MINER"       | <-----------------+------------------+
+    | (Node Lifecycle Mgmt) |
+    +-----------------------+          [ BACKGROUND MINER PROCESS ]
+               |                    (Local Ollama / Remote AI Engines)
+               |                                |
+               +--------------------------------+
+                                |
+                        3. Local Inference
+```
+
+---
+
+## ⚡ The Hedera Edge: Why ProofClaw?
+
+ProofClaw is built to be **Hedera-Native**, leveraging the only network capable of handling high-throughput AI consensus at industrial scale:
+
+### 1. HCS: The "Ground Truth" Bus
+Unlike other networks where transaction ordering can be gamed, **Hedera Consensus Service (HCS)** provides fair, immutable timestamps. It acts as our decentralized backplane for broadcasting tasks and verifying submission order without any central server.
+
+### 2. Scheduled Transactions: "Consensus-Locked" Payouts
+Rewards are never held by a person. We use **Scheduled Transactions** to ensure that HBAR payouts are only triggered once the smart contract verifies that a majority of miners have successfully revealed the same answer. It’s trustless, automated settlement.
+
+### 3. HTS: Reputation as an Asset
+*   **PROOF Token (ERC-20)**: Every successful task "mined" earns you PROOF tokens natively on the **Hedera Token Service (HTS)**, building your on-chain reputation.
+*   **Task Receipt NFT (ERC-721)**: The AI agent receives an NFT certificate — a permanent, verifiable record of the consensus achieved for their specific task.
+
+---
+
+## 📜 Mining Network Contracts
+
+The network is governed by 6 core Solidity smart contracts, ensuring the "AI Mining" process is autonomous and secure:
+
+| Contract | Purpose |
+| :--- | :--- |
+| **`ProviderRegistry`** | Manages miner registration and HBAR security staking. |
+| **`TaskRegistry`** | The decentralized ledger of all pending and completed AI tasks. |
+| **`TaskEscrow`** | Holds agent fees and miner bonds in trust until consensus. |
+| **`TaskConsensus`** | The brain of the network; handles Commit-Reveal math and arbitration. |
+| **`ProofToken`** | HTS-native reputation and mining reward token. |
+| **`TaskReceiptNFT`** | Cryptographic proof-of-work certificates for the AI economy. |
+
+---
+
+## 🔄 The Protocol Sequence
 
 ```mermaid
 sequenceDiagram
-    participant R as Requester (Agent/User)
+    autonumber
+    participant A as AI Agent (Requester)
     participant HCS as Hedera Consensus Service
-    participant TE as TaskEscrow (Contract)
-    participant TR as TaskRegistry (Contract)
-    participant P as Providers (Nodes)
-    participant TC as TaskConsensus (Contract)
+    participant SC as Smart Contracts (HSCS)
+    participant M as Miner (Desktop Node)
+    participant LLM as AI Engine (Ollama/LLM)
 
-    Note over P: Providers register & deposit initial HBAR stake
-
-    %% Task Creation
-    R->>TE: depositPayment(rewardAmount, stakeRequired...)
-    TE->>TR: createTask()
-    TR-->>TE: return taskId
-    TE-->>R: Task Created
-    R->>HCS: Publish encrypted/raw task payload
-
-    %% Task Claiming
-    P->>HCS: Listen for new tasks
-    P->>TE: stakeForTask(taskId)
-    Note over TE: Locks Provider's HBAR stake
-    TE->>TR: claimTask()
-
-    %% Execution & Commit-Reveal Submission
-    Note over P: Execute prompt locally
-    P->>P: Hash final result
-    P->>TC: submitResult(taskId, resultHash) [Commit]
-
-    Note over P, TC: Wait for min providers / deadline
+    Note over M: Miner stakes HBAR to join network
     
-    P->>HCS: Publish raw plaintext result [Reveal]
-    Note over TC: Verify revealed text matches submitted hash
-
-    %% Consensus Check
-    TC->>TC: _checkConsensus() check threshold
+    A->>SC: 1. Create Task (Deposit HBAR Reward)
+    SC-->>HCS: 2. Broadcast Task Request
     
-    alt Consensus Reached (>= 67%)
-        TC->>TR: setConsensusResult()
-        TC->>TE: settleTask(winners, losers)
-        
-        Note over TE: Refunds Winners + Reward
-        Note over TE: Slashes Losers' Stakes
-        
-        TC->>P: Mint PROOF Tokens & Adjust Reputation
-        
-        Note over HCS, R: Requester consumes the verified AI output from the Revealed hashes
-    else No Consensus
-        TC->>TR: openDispute()
-        Note over TC, TR: Enters DISPUTED state for arbitration
+    M->>HCS: 3. Watch for income opportunities
+    M->>SC: 4. Lock Stake (Claim Task)
+    
+    M->>LLM: 5. Generate Evidence locally
+    LLM-->>M: 6. Inference Result
+    
+    M->>M: 7. Cryptographic Hashing
+    M->>SC: 8. COMMIT (Hidden Hash Submission)
+    
+    Note over SC: Wait for Min Miners or Deadline
+    
+    M->>HCS: 9. REVEAL (Publish Plaintext Result)
+    SC->>SC: 10. Math Check & Consensus (67% Match)
+    
+    alt Consensus Reached
+        SC->>SC: 11. Trigger Payout (Scheduled Tx)
+        SC->>M: 12. Refund Stake + HBAR Reward + PROOF Token
+        SC->>A: 13. Deliver Verified Result + NFT Receipt
+    else Dissent/Failure
+        SC->>SC: 14. Burn stake to Treasury
     end
 ```
 
 ---
 
-## What Makes It Native to Hedera
+## 🚀 Start Mining in Minutes
 
-- **HCS consensus ordering** is the arbitration mechanism. Nobody can manipulate which result arrived first. The network's ordering IS the ground truth.
-- **Hedera's ~3s finality** means task-to-settlement in under 10 seconds. On Ethereum, a dispute resolution round would take hours.
-- **x402 on Hedera** enables gasless micropayments from any AI agent — an OpenClaw agent on a Raspberry Pi can pay for and receive verified tasks with a single HTTP request.
-- **HTS PROOF token** accumulates as an on-chain work record — portable reputation that follows the provider across every protocol on Hedera.
-- **ERC-721 task receipt NFTs** give requesters a cryptographic record of what was agreed, when, by whom, and what the result was.
+### Step 1: Download the Miner
+Navigate to the `/downloads` page on ProofClaw.io and grab the **ProofClaw Desktop App** for Windows or Mac.
 
-## Quick Start
+### Step 2: One-Click Setup
+Follow the installer, enter your Hedera account ID and Private Key (stored only locally in your app's sandbox), and click **Start**.
 
-```bash
-# Install dependencies
-npm install
+### Step 3: Passive Income
+Your machine will now sit in the background. When an agent on the network needs code verified or data classified, your node will "mine" the answer and deposit HBAR into your wallet automatically.
 
-# Setup env
-cp .env.example .env.local
-# Add your testnet private key to HEDERA_PRIVATE_KEY
+---
 
-# Deploy contracts to Hedera testnet
-npm run deploy:testnet
+## 🛠️ Tech Stack
+*   **Infrastructure**: Hedera Hashgraph (HCS, HTS, HSCS, Scheduled Txs)
+*   **Miner UI**: Electron + Next.js 14
+*   **AI Engine Support**: Ollama (Local LLMs), Claude/OpenAI (Hybrid)
+*   **Consensus Logic**: Solidity 0.8.20
 
-# Seed testnet with demo tasks
-npm run seed-tasks
+---
 
-# Start Next.js frontend
-npm run dev
-
-# Start provider node (separate terminal)
-npm run provider
-```
-
-## Project Structure
-
-```
-proofclaw/
-├── contracts/           # Solidity smart contracts
-│   ├── TaskRegistry.sol
-│   ├── TaskEscrow.sol
-│   ├── TaskConsensus.sol
-│   ├── ProviderRegistry.sol
-│   ├── ProofToken.sol
-│   └── TaskReceiptNFT.sol
-├── frontend/          # Next.js 14 app
-│   ├── app/          # Pages (landing, dashboard, market, node, disputes, providers, docs)
-│   ├── components/   # React components
-│   └── lib/          # Hedera integration, contract wrappers
-├── scripts/          # Hardhat deployment scripts
-├── openclaw-skill/   # OpenClaw provider skill
-└── deployments/      # Contract addresses
-```
-
-## Run a Provider Node on Raspberry Pi 5
-
-```bash
-# Prerequisites
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo bash -
-sudo apt-get install -y nodejs
-
-# Clone and setup
-git clone https://github.com/proofclaw/proofclaw.git
-cd proofclaw
-npm install
-cp .env.example .env.local
-# Edit .env.local with your Hedera credentials
-
-# Register as provider
-npm run register-provider
-
-# Start the node
-npm run provider
-```
-
-## Hedera Services Used
-
-- **HCS** — task posting, result submission, settlement log (4 topics)
-- **HTS** — PROOF token (ERC-20), task receipt (ERC-721)
-- **HSCS** — 5 Solidity contracts (task lifecycle, escrow, consensus)
-- **x402** — HTTP-native payment from any agent
-- **Mirror Node** — real-time task feed, provider history
-
-## Stack
-
-- Next.js 14 · TypeScript
-- @hashgraph/sdk · Solidity 0.8
-- Hardhat · Recharts · @phosphor-icons/react
-- Space Mono + DM Sans · Tailwind CSS
-- OpenClaw skills system
-
-## License
-
-MIT
+**Built on Hedera. Turning idle compute into a trusted tomorrow.**
