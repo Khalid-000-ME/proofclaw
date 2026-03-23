@@ -75,14 +75,14 @@ export default function LandingPage() {
             </div>
 
             <h1 className="font-instrument text-5xl md:text-8xl lg:text-9xl font-black text-white mb-7 tracking-wide leading-[0.9] italic animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-150 fill-mode-both">
-              Quality Layer for <span className="text-[#E8201A]">AI Commerce</span>
+              Mining Network for <span className="text-[#E8201A]">AI Agents</span>
             </h1>
             <p className="text-lg md:text-xl text-[#A3A3A3] max-w-2xl mx-auto mb-7 font-medium leading-relaxed">
-              Enforcing mathematical consensus for decentralized AI agents. Stake HBAR, earn PROOF, and secure the machine-to-machine economy on Hedera.
+              Stop trusting APIs blindly. Turn your idle silicon into income and provide cryptographic proof for the machine-to-machine economy on Hedera.
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4">
               <Link href="/downloads" className="w-full md:w-auto bg-[#E8201A] text-white px-12 py-5 font-black text-lg uppercase tracking-widest hover:shadow-[0_0_30px_rgba(232,32,26,0.3)] transition-all duration-300 rounded-full hover:scale-105 hover:bg-red-600">
-                Run a provider
+                Start Mining
               </Link>
               <Link href="/task" className="w-full md:w-auto border-2 border-[#2A2A2A] text-white px-14 py-6 font-black uppercase tracking-widest text-lg hover:bg-[#1a1a1a] transition-all duration-300 rounded-full hover:scale-103 hover:border-[#E8201A] hover:shadow-[0_0_30px_rgba(232,32,26,0.3)]">
                   Launch App
@@ -95,11 +95,11 @@ export default function LandingPage() {
         <section className="py-32 px-8 max-w-7xl mx-auto bg-[#0a0a0a]">
           <div className="flex flex-col lg:flex-row justify-between items-baseline mb-20 gap-8">
             <div className="max-w-2xl">
-              <span className="text-[#E8201A] font-black uppercase tracking-[0.4em] text-xs mono-font">System architecture</span>
-              <h2 className="font-instrument text-5xl md:text-7xl font-black text-white mt-4 tracking-wide leading-none italic">Integrity for Intelligence.</h2>
+              <span className="text-[#E8201A] font-black uppercase tracking-[0.4em] text-xs mono-font">The Mining Protocol</span>
+              <h2 className="font-instrument text-5xl md:text-7xl font-black text-white mt-4 tracking-wide leading-none italic">Proof Over Promises.</h2>
             </div>
             <p className="text-[#A3A3A3] max-w-xs text-sm leading-relaxed border-l-2 border-[#E8201A] pl-6 font-medium">
-              ProofClaw eliminates low-quality AI outputs through rigorous economic incentives and cryptographic verification protocols.
+              We connect your idle hardware to millions of AI agents who need verifiable proof, not just blind API calls.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -107,16 +107,16 @@ export default function LandingPage() {
             <div className="md:col-span-8 bg-[#111111] p-12 flex flex-col justify-between min-h-[450px] border border-[#1F1F1F] group hover:border-[#E8201A]/50 transition-all duration-300 rounded-3xl hover:shadow-[0_0_40px_rgba(232,32,26,0.2)] hover:scale-[1.02]">
               <Wallet className="text-[#E8201A]" size={48} />
               <div>
-                <h3 className="headline-font text-4xl font-black mb-6 uppercase">Provider Onboarding</h3>
-                <p className="text-[#A3A3A3] max-w-md text-lg leading-relaxed">Minimum HBAR stake ensures high-quality contributions. Stake serves as a bond for performance reliability and network safety.</p>
+                <h3 className="headline-font text-4xl font-black mb-6 uppercase">Mining Registration</h3>
+                <p className="text-[#A3A3A3] max-w-md text-lg leading-relaxed">Download the app, enter your account, and hit start. Your machine joins a decentralized network of honest providers instantly.</p>
               </div>
             </div>
             {/* Feature B */}
             <div className="md:col-span-4 bg-[#111111] p-12 flex flex-col justify-between border border-[#1F1F1F] rounded-[24px] hover:border-[#E8201A]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(232,32,26,0.2)] hover:scale-[1.02]">
               <Clipboard className="text-[#E8201A]" size={48} />
               <div>
-                <h3 className="headline-font text-2xl font-black mb-4 uppercase">Task Claiming</h3>
-                <p className="text-[#A3A3A3] text-sm leading-relaxed font-medium">Explicit staking against individual tasks to limit participation to providers with significant skin in the game.</p>
+                <h3 className="headline-font text-2xl font-black mb-4 uppercase">Idle Compute</h3>
+                <p className="text-[#A3A3A3] text-sm leading-relaxed font-medium">Turn your laptop or Raspberry Pi into a profit center. Mine HBAR in the background while you work or sleep.</p>
               </div>
             </div>
             {/* Feature C */}
@@ -133,8 +133,8 @@ export default function LandingPage() {
                 <ShieldCheck className="text-[#10b981]" size={48} />
               </div>
               <div>
-                <h3 className="headline-font text-4xl font-black mb-6 uppercase">Cryptographic Finality</h3>
-                <p className="text-[#A3A3A3] max-w-md text-lg leading-relaxed">67% majority consensus refunds stakes and mints <span className="text-[#E8201A] font-bold">PROOF</span> reputation tokens, creating a perpetual trust engine.</p>
+                <h3 className="headline-font text-4xl font-black mb-6 uppercase">Cryptographic Receipts</h3>
+                <p className="text-[#A3A3A3] max-w-md text-lg leading-relaxed">Every verified result is delivered with an on-chain receipt. 67% consensus ensures the AI agent gets exactly what they paid for.</p>
               </div>
             </div>
           </div>
@@ -205,13 +205,13 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto bg-[#111111] p-12 md:p-24 text-center relative overflow-hidden border-2 border-[rgba(232,32,26,0.27)] rounded-3xl hover:shadow-[0_0_60px_rgba(232,32,26,0.4)] transition-all duration-300 hover:scale-[1.01]">
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8201A]/5 blur-[120px]"></div>
             <div className="relative z-10">
-              <h2 className="font-instrument text-5xl md:text-7xl font-black text-white mb-12 tracking-wide italic">Enter the AI Economy.</h2>
+              <h2 className="font-instrument text-5xl md:text-7xl font-black text-white mb-12 tracking-wide italic">Mine for the AI Economy.</h2>
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                 <Link href="/downloads" className="w-full md:w-auto bg-[#E8201A] text-white px-14 py-6 font-black uppercase tracking-widest text-lg hover:shadow-[0_0_40px_rgba(232,32,26,0.4)] transition-all duration-300 rounded-full hover:scale-110 hover:bg-red-600">
-                  Become Provider
+                  Start Mining Now
                 </Link>
                 <Link href="/task" className="w-full md:w-auto border-2 border-[#2A2A2A] text-white px-14 py-6 font-black uppercase tracking-widest text-lg hover:bg-[#1a1a1a] transition-all duration-300 rounded-full hover:scale-110 hover:border-[#E8201A] hover:shadow-[0_0_30px_rgba(232,32,26,0.3)]">
-                  Register Task
+                  Launch Task App
                 </Link>
               </div>
             </div>
