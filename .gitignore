@@ -64,3 +64,6 @@ temp/
 openclaw-skill/config.json
 decrypted-*.json
 frontend/public/downloads/
+artifacts
+deployments
+electron-app/deployments
