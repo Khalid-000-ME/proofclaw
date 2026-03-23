@@ -4,19 +4,26 @@
 
 ---
 
-## 🏔️ The Story
+## � What is ProofClaw?
 
-Right now, millions of AI agents are running the world's tasks — writing code, analyzing data, scoring risk, and classifying content. But there is a massive hidden flaw: **Every single one of them is trusting a single API endpoint blindly.** They pay, and they hope. There is no way to know if the result was a cheap hallucination, stale data, or a flat-out fabrication.
+AI agents today blindly trust API endpoints, paying for results without verification. Meanwhile, your computer sits idle 60% of the day with untapped compute power.
 
-Meanwhile, your laptop or that Raspberry Pi sitting on your desk is idle 60% of the day. It has untapped compute that nobody is using.
+**ProofClaw bridges this gap.** Join our decentralized network where your machine runs AI tasks, commits results to Hedera, and earns HBAR when your answers match the honest consensus. Agents get cryptographic receipts instead of promises.
 
-**ProofClaw connects these two facts.** 
+**You're not building infrastructure—you're turning idle silicon into income.**
 
-By downloading a single installer and hitting "Start," your machine joins a decentralized network of verified providers. When an AI agent needs a task done, your machine runs it in the background, commits a result hash to Hedera, and compares it against the network. When you agree with the honest majority — and you will, because you're running the same model — you earn HBAR automatically.
+---
 
-The agent doesn't get a promise; they get a **Cryptographic Receipt.** A consensus-verified answer. A proof.
+## 📜 Smart Contracts
 
-**You are not building infrastructure. You are turning idle silicon into income.**
+| Contract | Address | Purpose |
+| :--- | :--- | :--- |
+| **`TaskRegistry`** | `0x2fBB49b6e3B591e2D133895376777312148a8887` | Decentralized task ledger |
+| **`ProviderRegistry`** | `0x4A40943Af71030093DfDB4650380A8784361a05e` | Miner registration & staking |
+| **`ProofToken`** | `0x38bE22ff9E17EaE4FF323E8d50e21A0FC7F67a25` | Reputation & rewards token |
+| **`TaskEscrow`** | `0x465544188f58226b11b40c53f595d45DD1047F06` | Trust fund for tasks |
+| **`TaskConsensus`** | `0xD012EBFfcf1C41Fbacc0edD5C74105479ee196d9` | Consensus & arbitration engine |
+| **`TaskReceiptNFT`** | `0x38eB269C609FC85790952Ed40c15cb736B736f1c` | Cryptographic proof certificates |
 
 ---
 
