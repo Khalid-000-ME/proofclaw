@@ -1,0 +1,16 @@
+{
+  "hederaAccountId": "0.0.8309550",
+  "hederaPrivateKey": "3030020100300706052b8104000a04220420348c16631c8caa9a755035381e2aa54bf82443aa176421b2b1719ca9f1da4095",
+  "ethereumPrivateKey": "0x348c16631c8caa9a755035381e2aa54bf82443aa176421b2b1719ca9f1da4095",
+  "taskEscrowAddress": "0xdE06587e738Efb98b0B0831dee37b91f96970cCc",
+  "tasksTopic": "0.0.8309839",
+  "stakePerTask": 1,
+  "maxConcurrentTasks": 3,
+  "taskTypes": [
+    "CLASSIFICATION",
+    "SCORING"
+  ],
+  "llmProvider": "ollama",
+  "ollamaUrl": "http://localhost:11434",
+  "ollamaModel": "qwen3:4b"
+}

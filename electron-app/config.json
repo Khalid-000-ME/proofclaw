@@ -1,0 +1,9 @@
+{
+  "llmProvider": "ollama",
+  "ollamaModel": "qwen3:4b",
+  "ollamaUrl": "http://localhost:11434",
+  "tasksTopic": "0.0.8309839",
+  "hederaAccountId": "0.0.8258062",
+  "hederaPrivateKey": "3030020100300706052b8104000a04220420f22783679f414206e607e03f8feaeeac570a410320cd1479aeda7356b34b607e",
+  "evmPrivateKey": "0xf22783679f414206e607e03f8feaeeac570a410320cd1479aeda7356b34b607e"
+}
