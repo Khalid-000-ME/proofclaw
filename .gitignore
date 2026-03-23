@@ -4,6 +4,7 @@
 .env.*.local
 .env.production
 .env.development
+.env.example
 
 # ─── Node.js Dependencies ─────────────────────────────────────────────────────
 node_modules/
