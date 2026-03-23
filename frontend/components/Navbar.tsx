@@ -29,6 +29,7 @@ export function Navbar() {
     { href: '/task', label: 'TASK', active: pathname === '/task' },
     { href: '/providers', label: 'PROVIDERS', active: pathname === '/providers' },
     { href: '/market', label: 'MARKET', active: pathname === '/market' },
+    { href: '/downloads', label: 'DOWNLOADS', active: pathname === '/downloads' },
   ]
 
   // Check if wallet is already connected on mount

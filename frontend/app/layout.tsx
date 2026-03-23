@@ -25,6 +25,9 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   title: 'ProofClaw — Quality-staked AI tasks on Hedera',
   description: 'ProofClaw is a quality-staked AI task market on Hedera. Providers stake HBAR on the correctness of every result they return.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({

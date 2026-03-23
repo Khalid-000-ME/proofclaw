@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Head from 'next/head'
 import { Wallet, Clipboard, Lock, ShieldCheck, Terminal, Code } from '@phosphor-icons/react'
 import ShapeGrid from '@/components/ShapeGrid'
 import { Unbounded } from 'next/font/google'
@@ -11,12 +10,6 @@ const unbounded = Unbounded({ subsets: ['latin'], weight: ['900'] })
 export default function LandingPage() {
   return (
     <>
-      <Head>
-        <title>ProofClaw | The Quality Layer for AI Commerce</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Space+Mono&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:wght@400;700&display=swap" rel="stylesheet" />
-      </Head>
-      
       <style jsx global>{`
         .headline-font { font-family: var(--font-sans), 'Space Grotesk', sans-serif; }
         .mono-font { font-family: var(--font-mono), 'Space Mono', monospace; }
@@ -88,8 +81,11 @@ export default function LandingPage() {
               Enforcing mathematical consensus for decentralized AI agents. Stake HBAR, earn PROOF, and secure the machine-to-machine economy on Hedera.
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-              <Link href="/dashboard" className="w-full md:w-auto bg-[#E8201A] text-white px-12 py-5 font-black text-lg uppercase tracking-widest hover:shadow-[0_0_30px_rgba(232,32,26,0.3)] transition-all duration-300 rounded-full hover:scale-105 hover:bg-red-600">
-                Launch App
+              <Link href="/downloads" className="w-full md:w-auto bg-[#E8201A] text-white px-12 py-5 font-black text-lg uppercase tracking-widest hover:shadow-[0_0_30px_rgba(232,32,26,0.3)] transition-all duration-300 rounded-full hover:scale-105 hover:bg-red-600">
+                Run a provider
+              </Link>
+              <Link href="/task" className="w-full md:w-auto border-2 border-[#2A2A2A] text-white px-14 py-6 font-black uppercase tracking-widest text-lg hover:bg-[#1a1a1a] transition-all duration-300 rounded-full hover:scale-103 hover:border-[#E8201A] hover:shadow-[0_0_30px_rgba(232,32,26,0.3)]">
+                  Launch App
               </Link>
             </div>
           </div>
@@ -201,41 +197,6 @@ export default function LandingPage() {
                 </li>
               </ul>
             </div>
-            {/* Terminal */}
-            <div className="bg-[#0a0a0a] border-2 border-[#2A2A2A] p-2 shadow-2xl shadow-[#E8201A]/5 rounded-3xl hover:shadow-[0_0_60px_rgba(232,32,26,0.3)] transition-all duration-300">
-              <div className="bg-[#1a1a1a] px-6 py-3 flex items-center gap-2 border-b border-[#2A2A2A] rounded-t-2xl">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 bg-[#E8201A]/30 rounded-full"></div>
-                  <div className="w-3 h-3 bg-[#f2db07]/10 rounded-full"></div>
-                  <div className="w-3 h-3 bg-[#07f22e]/10 rounded-full"></div>
-                </div>
-                <span className="text-[10px] uppercase tracking-widest text-[#A3A3A3] ml-4 mono-font font-bold">proofclaw-terminal — shell</span>
-              </div>
-              <div className="p-8 mono-font text-sm md:text-base leading-relaxed bg-[#0a0a0a] rounded-b-2xl">
-                <div className="flex gap-4 mb-2">
-                  <span className="text-[#E8201A] font-bold">$</span>
-                  <span className="text-white">npm install proofclaw-sdk</span>
-                </div>
-                <div className="flex gap-4 mb-2">
-                  <span className="text-[#E8201A] font-bold">$</span>
-                  <span className="text-white">npm run deploy:mainnet</span>
-                </div>
-                <div className="text-[#A3A3A3]/40 mb-2 italic">// Initializing protocol handshake... [OK]</div>
-                <div className="flex gap-4 mb-2">
-                  <span className="text-[#E8201A] font-bold">$</span>
-                  <span className="text-white">npm run register-node --stake 10000</span>
-                </div>
-                <div className="text-[#A3A3A3]/40 mb-2 italic">// Committing 10000 HBAR stake to pool...</div>
-                <div className="flex gap-4">
-                  <span className="text-[#E8201A] font-bold">$</span>
-                  <span className="text-white">npm start node</span>
-                </div>
-                <div className="mt-6 flex items-center gap-3 text-[#E8201A]">
-                  <span className="animate-pulse font-black text-xl">_</span>
-                  <span className="text-xs uppercase tracking-[0.3em] font-black">Node active: Waiting for tasks...</span>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -246,7 +207,7 @@ export default function LandingPage() {
             <div className="relative z-10">
               <h2 className="font-instrument text-5xl md:text-7xl font-black text-white mb-12 tracking-wide italic">Enter the AI Economy.</h2>
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                <Link href="/register" className="w-full md:w-auto bg-[#E8201A] text-white px-14 py-6 font-black uppercase tracking-widest text-lg hover:shadow-[0_0_40px_rgba(232,32,26,0.4)] transition-all duration-300 rounded-full hover:scale-110 hover:bg-red-600">
+                <Link href="/downloads" className="w-full md:w-auto bg-[#E8201A] text-white px-14 py-6 font-black uppercase tracking-widest text-lg hover:shadow-[0_0_40px_rgba(232,32,26,0.4)] transition-all duration-300 rounded-full hover:scale-110 hover:bg-red-600">
                   Become Provider
                 </Link>
                 <Link href="/task" className="w-full md:w-auto border-2 border-[#2A2A2A] text-white px-14 py-6 font-black uppercase tracking-widest text-lg hover:bg-[#1a1a1a] transition-all duration-300 rounded-full hover:scale-110 hover:border-[#E8201A] hover:shadow-[0_0_30px_rgba(232,32,26,0.3)]">
@@ -260,13 +221,13 @@ export default function LandingPage() {
         {/* Footer */}
         <footer className="bg-[#0a0a0a] border-t border-[#1F1F1F] w-full py-12 px-6">
           <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 max-w-7xl mx-auto">
-            <div className="text-lg font-black text-white font-['Space_Mono'] uppercase">ProofClaw</div>
+            <div className="text-lg font-black text-white mono-font uppercase">ProofClaw</div>
             <div className="flex flex-wrap justify-center gap-10">
-              <a className="font-['Space_Mono'] text-[10px] uppercase tracking-widest text-[#A3A3A3] hover:text-[#E8201A] transition-colors duration-300" href="https://twitter.com/proofclaw">Twitter</a>
-              <a className="font-['Space_Mono'] text-[10px] uppercase tracking-widest text-[#A3A3A3] hover:text-[#E8201A] transition-colors duration-300" href="https://github.com/proofclaw">GitHub</a>
-              <a className="font-['Space_Mono'] text-[10px] uppercase tracking-widest text-[#A3A3A3] hover:text-[#E8201A] transition-colors duration-300" href="#">Discord</a>
+              <a className="mono-font text-[10px] uppercase tracking-widest text-[#A3A3A3] hover:text-[#E8201A] transition-colors duration-300" href="https://twitter.com/proofclaw">Twitter</a>
+              <a className="mono-font text-[10px] uppercase tracking-widest text-[#A3A3A3] hover:text-[#E8201A] transition-colors duration-300" href="https://github.com/proofclaw">GitHub</a>
+              <a className="mono-font text-[10px] uppercase tracking-widest text-[#A3A3A3] hover:text-[#E8201A] transition-colors duration-300" href="#">Discord</a>
             </div>
-            <p className="font-['Space_Mono'] text-[10px] uppercase tracking-widest text-[#A3A3A3]">
+            <p className="mono-font text-[10px] uppercase tracking-widest text-[#A3A3A3]">
               © 2024 ProofClaw. Crimson Protocol Enabled.
             </p>
           </div>
