@@ -98,36 +98,40 @@ The network is governed by 6 core Solidity smart contracts, ensuring the "AI Min
 sequenceDiagram
     autonumber
     participant A as AI Agent (Requester)
+    participant SC as Smart Contracts
     participant HCS as Hedera Consensus Service
-    participant SC as Smart Contracts (HSCS)
-    participant M as Miner (Desktop Node)
-    participant LLM as AI Engine (Ollama/LLM)
+    participant M as Miner (Provider Node)
+    participant LLM as AI Engine (Local/Remote)
 
-    Note over M: Miner stakes HBAR to join network
+    Note over M: Provider stakes HBAR & joins network
     
     A->>SC: 1. Create Task (Deposit HBAR Reward)
-    SC-->>HCS: 2. Broadcast Task Request
+    SC->>SC: 2. Validate Task & Lock Reward
+    SC-->>HCS: 3. Emit TaskCreated Event
     
-    M->>HCS: 3. Watch for income opportunities
-    M->>SC: 4. Lock Stake (Claim Task)
+    M->>HCS: 4. Monitor Task Events (HCS Topic)
+    M->>SC: 5. Claim Task (Lock Additional Stake)
     
-    M->>LLM: 5. Generate Evidence locally
-    LLM-->>M: 6. Inference Result
+    M->>LLM: 6. Execute Task Locally
+    LLM-->>M: 7. Generate Result
     
-    M->>M: 7. Cryptographic Hashing
-    M->>SC: 8. COMMIT (Hidden Hash Submission)
+    M->>M: 8. Hash Result (SHA256)
+    M->>SC: 9. COMMIT (Submit Hash Only)
     
-    Note over SC: Wait for Min Miners or Deadline
+    Note over SC: Wait for deadline or min providers
     
-    M->>HCS: 9. REVEAL (Publish Plaintext Result)
-    SC->>SC: 10. Math Check & Consensus (67% Match)
+    M->>SC: 10. REVEAL (Submit Original Result)
+    SC->>SC: 11. Compare All Revealed Results
     
-    alt Consensus Reached
-        SC->>SC: 11. Trigger Payout (Scheduled Tx)
-        SC->>M: 12. Refund Stake + HBAR Reward + PROOF Token
-        SC->>A: 13. Deliver Verified Result + NFT Receipt
-    else Dissent/Failure
-        SC->>SC: 14. Burn stake to Treasury
+    alt Consensus Achieved (67%+ match)
+        SC->>SC: 12. Calculate Rewards
+        SC->>M: 13. Return Stake + HBAR Reward
+        SC->>M: 14. Mint PROOF Tokens
+        SC->>A: 15. Return Verified Result
+        SC->>A: 16. Mint TaskReceipt NFT
+    else No Consensus
+        SC->>SC: 17. Slash Dissenting Providers
+        SC->>M: 18. Burn Partial Stake
     end
 ```
 
